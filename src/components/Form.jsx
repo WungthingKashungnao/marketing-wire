@@ -2,13 +2,19 @@ import React, { useContext } from "react";
 import { context } from "../context/ContextApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useSound from "use-sound";
+import alertAudio from "./alert.mp3";
+import errorAudio from "./error.mp3";
 
 const Form = () => {
+  const [play] = useSound(alertAudio);
+  const [error] = useSound(errorAudio);
   const { formData, setFormData, allData, setAllData } = useContext(context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name === "" || formData.unit === "" || formData.price === "") {
+      error();
       toast("🦄 All Input Fields Are Required!", {
         position: "top-center",
         autoClose: 5000,
@@ -21,6 +27,7 @@ const Form = () => {
       });
     } else {
       setAllData([...allData, formData]);
+      play();
 
       toast.success("Successfully Added Item", {
         position: "top-center",
