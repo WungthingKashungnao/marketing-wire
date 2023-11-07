@@ -1,19 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { context } from "../context/ContextApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
-  const { formData, setFormData, localData, allData, setAllData } =
-    useContext(context);
-
-  useEffect(() => {
-    if (localData.length === 0) {
-      localStorage.setItem("items", JSON.stringify(allData));
-    } else if (localData.length >= 1) {
-      localStorage.setItem("items", JSON.stringify(allData));
-    }
-  }, [allData]);
+  const { formData, setFormData, allData, setAllData } = useContext(context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,11 +20,7 @@ const Form = () => {
         theme: "light",
       });
     } else {
-      if (localData.length === 0) {
-        setAllData([...allData, formData]);
-      } else if (localData.length >= 1) {
-        setAllData([...localData, formData]);
-      }
+      setAllData([...allData, formData]);
 
       toast.success("Successfully Added Item", {
         position: "top-center",
