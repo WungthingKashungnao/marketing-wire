@@ -33,7 +33,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col py-3 overflow-y-auto h-[93vh] mt-[7vh] justify-start items-center  w-[100%] relative">
+    <div className=" flex flex-col py-3 overflow-y-auto h-[93vh] mt-[7vh] justify-start items-center  w-[100%] relative">
       <h1 className="font-bold text-[2.5rem] my-3 text-white">Item List</h1>
       <div
         onClick={() => setShowInvoice(true)}
@@ -45,7 +45,7 @@ const Cart = () => {
         allData?.map((items, idx) => (
           <div
             key={idx}
-            className="flex flex-col my-2 rounded-lg shadow-md shadow-slate-800 w-[70%] md:w-[50%] py-2 px-4 hover:bg-indigo-500 relative"
+            className=" flex flex-col my-2 rounded-lg shadow-md shadow-slate-800 w-[70%] md:w-[50%] py-2 px-4 hover:bg-indigo-500 relative"
           >
             <div className="py-3 flex flex-col justify-center items-center">
               <h2 className="text-white font-medium md:text-[1.2rem]">

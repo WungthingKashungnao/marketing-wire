@@ -7,23 +7,24 @@ const Invoice = ({ setShowInvoice }) => {
   const componentRef = useRef();
 
   return (
-    <div className=" absolute top-0 right-0 w-full h-full bg-black flex flex-col justify-center items-center bg-opacity-50 ">
+    <div className="absolute top-0 right-0 w-full h-full  flex flex-col justify-start items-center ">
       <ReactToPrint
         trigger={() => (
-          <button className="shadow-lg shadow-slate-700 bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500  text-white font-bold px-3 py-2 my-2 rounded-md">
+          <button className="relative border border-white shadow-lg shadow-slate-700 bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500  text-white font-bold px-3 py-2 my-2 rounded-md">
             Print Invoice
           </button>
         )}
         content={() => componentRef.current}
       />
+
       <div
         ref={componentRef}
-        className="relative  bg-white text-black flex flex-col justify-center items-center my-2  w-[70%] md:w-[30%] py-2 px-4 rounded-xl"
+        className=" relative border border-red-600  bg-white text-black flex flex-col justify-center items-center my-2   w-[70%] md:w-[30%] py-2 px-4 rounded-xl "
       >
         <h1 className="font-bold text-[2rem]">Your Invoice</h1>
         {allData &&
           allData.map((items, idx) => (
-            <div className="">
+            <div>
               {
                 <p>
                   <span className="font-bold">Item name:</span> {items.name}
@@ -54,7 +55,7 @@ const Invoice = ({ setShowInvoice }) => {
 
         <div
           onClick={() => setShowInvoice(false)}
-          className="cursor-pointer w-[20px] h-[20px] absolute top-[-10px] right-[-10px] bg-red-600 rounded-full text-white font-bold flex justify-center items-center"
+          className=" cursor-pointer w-[20px] h-[20px] absolute top-[-10px] left-[-10px] bg-red-600 rounded-full text-white font-bold flex justify-center items-center"
         >
           X
         </div>
