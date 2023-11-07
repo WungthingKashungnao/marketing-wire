@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const context = createContext();
 
@@ -10,9 +10,19 @@ const ContextApi = ({ children }) => {
     price: "",
   });
 
+  const getTotal = () => {
+    let total = 0;
+    allData.map((val) => (total += val.unit * val.price));
+    setTotalPrice(total);
+  };
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [allData, setAllData] = useState([]); //state to handle all data in local storage
+
+  useEffect(() => {
+    getTotal();
+  }, [allData]);
 
   return (
     <context.Provider
@@ -23,6 +33,7 @@ const ContextApi = ({ children }) => {
         setAllData,
         totalPrice,
         setTotalPrice,
+        getTotal,
       }}
     >
       {children}

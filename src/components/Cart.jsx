@@ -1,15 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { context } from "../context/ContextApi";
+// import ReactToPrint from "react-to-print";
+import Invoice from "./Invoice";
 
 const Cart = () => {
-  const { allData, setAllData, totalPrice, setTotalPrice } =
-    useContext(context);
-
-  const getTotal = () => {
-    let total = 0;
-    allData.map((val) => (total += val.unit * val.price));
-    setTotalPrice(total);
-  };
+  const [showInvoice, setShowInvoice] = useState(false);
+  const { allData, setAllData, totalPrice } = useContext(context);
 
   const handleUpdate = (digit, items) => {
     let index = -1;
@@ -36,18 +32,20 @@ const Cart = () => {
     setAllData(temp);
   };
 
-  useEffect(() => {
-    getTotal();
-  }, [allData]);
-
   return (
-    <div className="flex flex-col py-3 overflow-y-auto h-[93vh] mt-[7vh] justify-start items-center  w-[100%]">
+    <div className="flex flex-col py-3 overflow-y-auto h-[93vh] mt-[7vh] justify-start items-center  w-[100%] relative">
       <h1 className="font-bold text-[2.5rem] my-3 text-white">Item List</h1>
+      <div
+        onClick={() => setShowInvoice(true)}
+        className="font-bold py-1 px-2 cursor-pointer rounded-lg bg-emerald-500 text-[1.5rem] my-1 text-white"
+      >
+        Show Invoice
+      </div>
       {allData &&
         allData?.map((items, idx) => (
           <div
             key={idx}
-            className="flex flex-col my-2 shadow-lg w-[70%] md:w-[50%] py-2 px-4 hover:bg-indigo-500 relative"
+            className="flex flex-col my-2 rounded-lg shadow-md shadow-slate-800 w-[70%] md:w-[50%] py-2 px-4 hover:bg-indigo-500 relative"
           >
             <div className="py-3 flex flex-col justify-center items-center">
               <h2 className="text-white font-medium md:text-[1.2rem]">
@@ -70,7 +68,10 @@ const Cart = () => {
                 </button>
               </div>
               <div className="text-white font-medium md:text-[1.2rem]">
-                Item Price: {items.price}
+                Single Item Price: {items.price}
+              </div>
+              <div className="text-white font-medium md:text-[1.2rem]">
+                {items.name} Item Price: {items.price * items.unit}
               </div>
             </div>
             <div
@@ -81,9 +82,11 @@ const Cart = () => {
             </div>
           </div>
         ))}
-      <div className="w-[40%] bg-emerald-500 py-4 mt-4 flex justify-center items-center text-white font-medium md:text-[1.2rem]">
+      <div className="mb-2 shadow-lg shadow-slate-700 w-[40%] rounded-md bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500  py-4 mt-4 flex justify-center items-center text-white font-medium md:text-[1.2rem]">
         Total: Rs {totalPrice}
       </div>
+
+      {showInvoice && <Invoice setShowInvoice={setShowInvoice} />}
     </div>
   );
 };
