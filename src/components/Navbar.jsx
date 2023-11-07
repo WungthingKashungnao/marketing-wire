@@ -1,14 +1,20 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-around items-center  bg-emerald-400 h-[7vh] w-full  absolute top-0 left-0 ">
-      <h1 className="text-white text-[1.7rem] font-bold cursor-pointer">
+    <div className="flex shadow-lg justify-around items-center h-[7vh] w-full  absolute top-0 left-0 ">
+      <Link
+        to={"/"}
+        className="text-white text-[1.7rem] font-bold cursor-pointer animate-bounce "
+      >
         Marketing Wire
-      </h1>
-      <div className="text-white text-[1.7rem] font-bold cursor-pointer">
+      </Link>
+      <Link
+        to={"/cart"}
+        className="text-white text-[1.7rem] font-bold cursor-pointer"
+      >
         Cart
-      </div>
+      </Link>
     </div>
   );
 };

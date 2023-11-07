@@ -1,10 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { context } from "../context/ContextApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
-  const { formData, setFormData } = useContext(context);
+  const { formData, setFormData, localData, allData, setAllData } =
+    useContext(context);
+
+  useEffect(() => {
+    if (localData.length === 0) {
+      localStorage.setItem("items", JSON.stringify(allData));
+    } else if (localData.length >= 1) {
+      localStorage.setItem("items", JSON.stringify(allData));
+    }
+  }, [allData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +29,12 @@ const Form = () => {
         theme: "light",
       });
     } else {
+      if (localData.length === 0) {
+        setAllData([...allData, formData]);
+      } else if (localData.length >= 1) {
+        setAllData([...localData, formData]);
+      }
+
       toast.success("Successfully Added Item", {
         position: "top-center",
         autoClose: 5000,
@@ -35,7 +50,7 @@ const Form = () => {
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-3"
+      className="flex flex-col  justify-center items-center gap-3 m-auto"
       onSubmit={handleSubmit}
     >
       <div>
@@ -79,7 +94,7 @@ const Form = () => {
           }
         />
       </div>
-      <button className="bg-gray-400 px-4 py-2 text-white font-bold rounded-md">
+      <button className="bg-emerald-500 px-4 py-2 text-white font-bold rounded-md">
         Save
       </button>
       <ToastContainer />
