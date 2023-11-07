@@ -19,7 +19,7 @@ const Invoice = ({ setShowInvoice }) => {
 
       <div
         ref={componentRef}
-        className=" relative border border-red-600  bg-white text-black flex flex-col justify-center items-center my-2   w-[70%] md:w-[30%] py-2 px-4 rounded-xl "
+        className=" relative  bg-white text-black flex flex-col justify-center items-center my-2   w-[70%] md:w-[30%] py-2 px-4 rounded-xl "
       >
         <h1 className="font-bold text-[2rem]">Your Invoice</h1>
         {allData &&
@@ -55,7 +55,7 @@ const Invoice = ({ setShowInvoice }) => {
 
         <div
           onClick={() => setShowInvoice(false)}
-          className=" cursor-pointer w-[20px] h-[20px] absolute top-[-10px] left-[-10px] bg-red-600 rounded-full text-white font-bold flex justify-center items-center"
+          className=" cursor-pointer w-[30px] h-[30px] absolute top-[-15px] right-[-15px] bg-red-800 rounded-full text-white font-bold flex justify-center items-center"
         >
           X
         </div>
